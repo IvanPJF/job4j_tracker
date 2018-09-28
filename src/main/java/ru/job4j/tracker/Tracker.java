@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import java.util.Arrays;
 import java.util.Random;
 
 /**Класс Tracker. Предназачен для хранения и работы с заявками.
@@ -80,24 +81,20 @@ public class Tracker {
      * @return Массив заявок с искомым именем.
      */
     public Item[] findByName(String key) {
-        int count = 0;
-        for (int i = 0; i < position; i++) {
-            if (this.items[i] != null && this.items[i].getName().equals(key)) {
-                count++;
-            }
-        }
-        Item[] result = new Item[count];
         int index = 0;
-        for (int out = 0; out < count; out++) {
+        int count = 0;
+        Item[] result = new Item[position];
+        for (int out = 0; out < position; out++) {
             for (int in = index; in < position; in++) {
                 if (this.items[in] != null && this.items[in].getName().equals(key)) {
                     result[out] = this.items[in];
+                    count++;
                     index = ++in;
                     break;
                 }
             }
         }
-        return result;
+        return Arrays.copyOf(result, count);
     }
 
     /**

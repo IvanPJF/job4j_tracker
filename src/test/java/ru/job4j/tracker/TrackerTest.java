@@ -17,8 +17,8 @@ public class TrackerTest {
     @Test
     public void whenReplaceDescriptionThenNewDescription() {
         Tracker tracker = new Tracker();
-        Item oldItem = new Item("Test1Name","Test1Desc", 1989L);
-        Item nextItem = new Item("Test2Name", "Test2Desc",1999L);
+        Item oldItem = new Item("Test1Name", "Test1Desc", 1989L);
+        Item nextItem = new Item("Test2Name", "Test2Desc", 1999L);
         tracker.add(oldItem);
         tracker.replace(oldItem.getId(), nextItem);
         assertThat(tracker.findById(oldItem.getId()).getDescription(), is("Test2Desc"));
@@ -27,9 +27,9 @@ public class TrackerTest {
     @Test
     public void whenDelete2ItemThenRemainder1Item() {
         Tracker tracker = new Tracker();
-        Item firstItem = new Item("Test1Name","Test1Desc", 1989L);
-        Item secondItem = new Item("Test2Name", "Test2Desc",1999L);
-        Item thirdItem = new Item("Test3Name", "Test3Desc",2009L);
+        Item firstItem = new Item("Test1Name", "Test1Desc", 1989L);
+        Item secondItem = new Item("Test2Name", "Test2Desc", 1999L);
+        Item thirdItem = new Item("Test3Name", "Test3Desc", 2009L);
         Item[] expect = new Item[]{secondItem};
         tracker.add(firstItem);
         tracker.add(secondItem);
@@ -42,9 +42,9 @@ public class TrackerTest {
     @Test
     public void whenFindAllThenShowAllItem() {
         Tracker tracker = new Tracker();
-        Item firstItem = new Item("Test1Name","Test1Desc", 1989L);
-        Item secondItem = new Item("Test2Name", "Test2Desc",1999L);
-        Item thirdItem = new Item("Test3Name", "Test3Desc",2009L);
+        Item firstItem = new Item("Test1Name", "Test1Desc", 1989L);
+        Item secondItem = new Item("Test2Name", "Test2Desc", 1999L);
+        Item thirdItem = new Item("Test3Name", "Test3Desc", 2009L);
         Item[] expect = new Item[]{firstItem, secondItem, thirdItem};
         tracker.add(firstItem);
         tracker.add(secondItem);
@@ -55,9 +55,9 @@ public class TrackerTest {
     @Test
     public void whenFindByNameThenShow2Item() {
         Tracker tracker = new Tracker();
-        Item firstItem = new Item("Test1Name","Test1Desc", 1989L);
-        Item secondItem = new Item("Test2Name", "Test2Desc",1999L);
-        Item thirdItem = new Item("Test1Name", "Test3Desc",2009L);
+        Item firstItem = new Item("Test1Name", "Test1Desc", 1989L);
+        Item secondItem = new Item("Test2Name", "Test2Desc", 1999L);
+        Item thirdItem = new Item("Test1Name", "Test3Desc", 2009L);
         Item[] expect = new Item[]{firstItem, thirdItem};
         tracker.add(firstItem);
         tracker.add(secondItem);
@@ -68,9 +68,9 @@ public class TrackerTest {
     @Test
     public void whenFindByIdThenShow1Item() {
         Tracker tracker = new Tracker();
-        Item firstItem = new Item("Test1Name","Test1Desc", 1989L);
-        Item secondItem = new Item("Test2Name", "Test2Desc",1999L);
-        Item thirdItem = new Item("Test1Name", "Test3Desc",2009L);
+        Item firstItem = new Item("Test1Name", "Test1Desc", 1989L);
+        Item secondItem = new Item("Test2Name", "Test2Desc", 1999L);
+        Item thirdItem = new Item("Test1Name", "Test3Desc", 2009L);
         tracker.add(firstItem);
         tracker.add(secondItem);
         tracker.add(thirdItem);
