@@ -39,30 +39,40 @@ public class Tracker {
      * Редактирование заявки в tracker.
      * @param id Id заявки, которую необходимо изменить.
      * @param item Изменение.
+     * @return Результат выполнения действия(true - заявка найдена и отредактирована, false - нет заявки с таким id).
      */
-    public void replace(String id, Item item) {
+    public boolean replace(String id, Item item) {
+        boolean result = false;
         for (int index = 0; index < position; index++) {
             if (this.items[index] != null && this.items[index].getId().equals(id)) {
                 item.setId(id);
                 this.items[index] = item;
+                result = true;
+                break;
             }
         }
+        return result;
     }
 
     /**
      * Удаление заявки из tracker.
      * @param id Id заявки, которую необходимо удалить.
+     * @return Результат выполнения действия(true - заявка найдена и удалена, false - нет заявки с таким id).
      */
-    public void delete(String id) {
+    public boolean delete(String id) {
+        boolean result = false;
         for (int index = 0; index < position; index++) {
             if (this.items[index] != null && this.items[index].getId().equals(id) && index != position - 1) {
                 System.arraycopy(this.items, index + 1, this.items, index, position - index - 1);
                 items[--position] = null;
+                result = true;
                 break;
             } else if (this.items[index] != null && this.items[index].getId().equals(id)) {
                 this.items[--position] = null;
+                result = true;
             }
         }
+        return result;
     }
 
     /**

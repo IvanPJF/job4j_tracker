@@ -51,4 +51,15 @@ public class Item {
     public void setCreate(long create) {
         this.create = create;
     }
+
+    /**
+     * Переопределяет метод toString.
+     * @return Содержимое полей Item.
+     */
+    @Override
+    public String toString() {
+        return "Name: [" + this.name
+                + "] Description: [" + this.description
+                + "] Id: [" + this.id + "]";
+    }
 }

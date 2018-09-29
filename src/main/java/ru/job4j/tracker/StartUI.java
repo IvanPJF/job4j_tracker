@@ -12,8 +12,8 @@ public class StartUI {
     private static final String ALL = "1";
     private static final String EDIT = "2";
     private static final String DEL = "3";
-    private static final String FINDID = "4";
-    private static final String FINDNAME = "5";
+    private static final String FIND_BY_ID = "4";
+    private static final String FIND_BY_NAME = "5";
     private static final String EXIT = "6";
     private final Input input;
     private final Tracker tracker;
@@ -39,9 +39,9 @@ public class StartUI {
                 this.editItem();
             } else if (DEL.equals(answer)) {
                 this.deleteItem();
-            } else if (FINDID.equals(answer)) {
+            } else if (FIND_BY_ID.equals(answer)) {
                 this.findId();
-            } else if (FINDNAME.equals(answer)) {
+            } else if (FIND_BY_NAME.equals(answer)) {
                 this.findName();
             } else if (EXIT.equals(answer)) {
                 exit = true;
@@ -68,10 +68,7 @@ public class StartUI {
     private void showAll() {
         System.out.println("========== All items =========");
         for (Item item : this.tracker.findAll()) {
-            System.out.println("Name: " + item.getName()
-                            + " Description: " + item.getDescription()
-                            + " Id " + item.getId()
-                    );
+            System.out.println(item);
         }
         System.out.println("==============================");
     }
@@ -86,8 +83,12 @@ public class StartUI {
         String description = this.input.ask("Enter description: ");
         long create = System.currentTimeMillis();
         Item item = new Item(name, description, create);
-        this.tracker.replace(id, item);
-        System.out.println("==============================");
+        boolean result = this.tracker.replace(id, item);
+        if (result) {
+            System.out.println("=========== Edited ===========");
+        } else {
+            System.out.println("==== No item with this ID ====");
+        }
     }
 
     /**
@@ -96,8 +97,12 @@ public class StartUI {
     private void deleteItem() {
         System.out.println("======== Delete item =========");
         String id = this.input.ask("Enter id: ");
-        this.tracker.delete(id);
-        System.out.println("==============================");
+        boolean result = this.tracker.delete(id);
+        if (result) {
+            System.out.println("========== Deleted ===========");
+        } else {
+            System.out.println("==== No item with this ID ====");
+        }
     }
 
     /**
@@ -106,14 +111,12 @@ public class StartUI {
     private void findId() {
         System.out.println("====== Find item by Id =======");
         String id = this.input.ask("Enter id: ");
-        Item result = this.tracker.findById(id);
-        if (result != null) {
-            System.out.println("Item found:\n\r" + "Name: " + result.getName()
-                    + " Description: " + result.getDescription()
-                    + " Id " + result.getId()
-            );
+        Item item = this.tracker.findById(id);
+        if (item != null) {
+            System.out.println(item + "\n==============================");
+        } else {
+            System.out.println("==== No item with this ID ====");
         }
-        System.out.println("==============================");
     }
 
     /**
@@ -123,10 +126,7 @@ public class StartUI {
         System.out.println("====  Find items with name ====");
         String name = this.input.ask("Enter name: ");
         for (Item item : this.tracker.findByName(name)) {
-            System.out.println("Name: " + item.getName()
-                    + " Description: " + item.getDescription()
-                    + " Id " + item.getId()
-            );
+            System.out.println(item);
         }
         System.out.println("==============================");
     }
