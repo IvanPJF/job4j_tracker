@@ -10,13 +10,6 @@ public class MenuTracker {
     private Input input;
     private Tracker tracker;
     private UserAction[] actions = new UserAction[7];
-    private static final String ADD = "0";
-    private static final String ALL = "1";
-    private static final String EDIT = "2";
-    private static final String DEL = "3";
-    private static final String FIND_BY_ID = "4";
-    private static final String FIND_BY_NAME = "5";
-    private static final String EXIT = "6";
 
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
@@ -29,13 +22,13 @@ public class MenuTracker {
      *           Необходим для контроля показа меню.
      */
     public void  fillActions(StartUI ui) {
-        this.actions[0] = new AddItem();
-        this.actions[1] = new ShowAllItem();
-        this.actions[2] = new EditItem();
-        this.actions[3] = new DeleteItem();
-        this.actions[4] = new FindByIdItem();
-        this.actions[5] = new FindByNameItem();
-        this.actions[6] = new ExitProgram(ui);
+        this.actions[0] = new AddItem(0, "Add new Item");
+        this.actions[1] = new ShowAllItem(1, "Show all items");
+        this.actions[2] = new EditItem(2, "Edit item");
+        this.actions[3] = new DeleteItem(3, "Delete item");
+        this.actions[4] = new FindByIdItem(4, "Find item by Id");
+        this.actions[5] = new FindByNameItem(5, "Find items by name");
+        this.actions[6] = new ExitProgram(6, "Exit Program", ui);
 
     }
 
@@ -69,13 +62,20 @@ public class MenuTracker {
      * Внутренний класс реализующий добавление заявки.
      */
     private class AddItem implements UserAction {
+        private final int key;
+        private final String name;
+
+        public AddItem(int key, String name) {
+            this.key = key;
+            this.name = name;
+        }
 
         /**
          * Ключ меню.
          */
         @Override
         public int key() {
-            return Integer.valueOf(ADD);
+            return this.key;
         }
 
         /**
@@ -97,7 +97,7 @@ public class MenuTracker {
          */
         @Override
         public String info() {
-            return String.format("%s. %s",this.key(), "Add new Item");
+            return String.format("%s. %s", this.key, this.name);
         }
     }
 
@@ -105,13 +105,20 @@ public class MenuTracker {
      * Внутренний класс реализующий показ всех заявок.
      */
     private class ShowAllItem implements UserAction {
+        private final int key;
+        private final String name;
+
+        public ShowAllItem(int key, String name) {
+            this.key = key;
+            this.name = name;
+        }
 
         /**
          * Ключ меню.
          */
         @Override
         public int key() {
-            return Integer.valueOf(ALL);
+            return this.key;
         }
 
         /**
@@ -131,7 +138,7 @@ public class MenuTracker {
          */
         @Override
         public String info() {
-            return String.format("%s. %s",this.key(), "Show all items");
+            return String.format("%s. %s", this.key, this.name);
         }
     }
 
@@ -139,13 +146,20 @@ public class MenuTracker {
      * Внутренний класс реализующий редактирование заявки.
      */
     private class EditItem implements UserAction {
+        private final int key;
+        private final String name;
+
+        public EditItem(int key, String name) {
+            this.key = key;
+            this.name = name;
+        }
 
         /**
          * Ключ меню.
          */
         @Override
         public int key() {
-            return Integer.valueOf(EDIT);
+            return this.key;
         }
 
         /**
@@ -172,7 +186,7 @@ public class MenuTracker {
          */
         @Override
         public String info() {
-            return String.format("%s. %s",this.key(), "Edit item");
+            return String.format("%s. %s", this.key, this.name);
         }
     }
 
@@ -180,13 +194,20 @@ public class MenuTracker {
      * Внутренний класс реализующий удаление заявки.
      */
     private class DeleteItem implements UserAction {
+        private final int key;
+        private final String name;
+
+        public DeleteItem(int key, String name) {
+            this.key = key;
+            this.name = name;
+        }
 
         /**
          * Ключ меню.
          */
         @Override
         public int key() {
-            return Integer.valueOf(DEL);
+            return this.key;
         }
 
         /**
@@ -209,7 +230,7 @@ public class MenuTracker {
          */
         @Override
         public String info() {
-            return String.format("%s. %s",this.key(), "Delete item");
+            return String.format("%s. %s", this.key, this.name);
         }
     }
 
@@ -217,13 +238,20 @@ public class MenuTracker {
      * Внутренний класс реализующий поиск заявки по Id.
      */
     private class FindByIdItem implements UserAction {
+        private final int key;
+        private final String name;
+
+        public FindByIdItem(int key, String name) {
+            this.key = key;
+            this.name = name;
+        }
 
         /**
          * Ключ меню.
          */
         @Override
         public int key() {
-            return Integer.valueOf(FIND_BY_ID);
+            return this.key;
         }
 
         /**
@@ -246,7 +274,7 @@ public class MenuTracker {
          */
         @Override
         public String info() {
-            return String.format("%s. %s",this.key(), "Find item by Id");
+            return String.format("%s. %s", this.key, this.name);
         }
     }
 
@@ -254,13 +282,20 @@ public class MenuTracker {
      * Внутренний класс реализующий поиск заявки по имени.
      */
     private class FindByNameItem implements UserAction {
+        private final int key;
+        private final String name;
+
+        public FindByNameItem(int key, String name) {
+            this.key = key;
+            this.name = name;
+        }
 
         /**
          * Ключ меню.
          */
         @Override
         public int key() {
-            return Integer.valueOf(FIND_BY_NAME);
+            return this.key;
         }
 
         /**
@@ -281,7 +316,7 @@ public class MenuTracker {
          */
         @Override
         public String info() {
-            return String.format("%s. %s",this.key(), "Find items by name");
+            return String.format("%s. %s", this.key, this.name);
         }
     }
 
@@ -289,9 +324,13 @@ public class MenuTracker {
      * Внутренний класс реализующий завершение программы.
      */
     private class ExitProgram implements UserAction {
+        private final int key;
+        private final String name;
         private final StartUI ui;
 
-        private ExitProgram(StartUI ui) {
+        public ExitProgram(int key, String name, StartUI ui) {
+            this.key = key;
+            this.name = name;
             this.ui = ui;
         }
 
@@ -300,7 +339,7 @@ public class MenuTracker {
          */
         @Override
         public int key() {
-            return Integer.valueOf(EXIT);
+            return this.key;
         }
 
         /**
@@ -316,7 +355,7 @@ public class MenuTracker {
          */
         @Override
         public String info() {
-            return String.format("%s. %s",this.key(), "Exit Program");
+            return String.format("%s. %s", this.key, this.name);
         }
     }
 }
