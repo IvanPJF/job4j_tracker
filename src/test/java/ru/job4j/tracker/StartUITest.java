@@ -33,8 +33,7 @@ public class StartUITest {
 				.append("3. Delete item").append(ln)
 				.append("4. Find item by Id").append(ln)
 				.append("5. Find items by name").append(ln)
-				.append("6. Exit Program").append(ln)
-				.append("Select:").append(ln).toString();
+				.append("6. Exit Program").append(ln).toString();
 	}
 
 	@Test
