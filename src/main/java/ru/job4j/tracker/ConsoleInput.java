@@ -21,4 +21,28 @@ public class ConsoleInput implements Input {
         System.out.print(question);
         return scanner.nextLine();
     }
+
+    /**
+     * Работа с пользователем через консоль.
+     * Задаём вопрос, получаем ответ.
+     * Если пользователь ввёл невозможное значение пункта меню, выкидывается ошибка.
+     * @param question Вопрос пользователю.
+     * @param range Набор возможных вариантов выбора меню.
+     * @return Ответ пользователя.
+     */
+    public int ask(String question, int[] range) {
+        int key = Integer.valueOf(this.ask(question));
+        boolean exist = false;
+        for (int index: range) {
+            if (index == key) {
+                exist = true;
+                break;
+            }
+        }
+        if (exist) {
+            return key;
+        } else {
+            throw new MenuOutException("Out of menu range.");
+        }
+    }
 }

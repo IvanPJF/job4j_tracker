@@ -9,7 +9,7 @@ package ru.job4j.tracker;
 public class StubInput implements Input {
 	private String[] answers;
 	private int position;
-	
+
 	public StubInput(String[] answers) {
 		this.answers = answers;
 	}
@@ -21,5 +21,15 @@ public class StubInput implements Input {
 	 */
 	public String ask(String question) {
 		return this.answers[position++];
+	}
+
+	/**
+	 * Задаём вопрос, получаем ответ.
+	 * @param question Вопрос пользователю.
+	 * @param range Набор возможных вариантов выбора меню.
+	 * @return Эмуляция ответа от пользователя.
+	 */
+	public int ask(String question, int[] range) {
+		return Integer.valueOf(this.ask(question));
 	}
 }
