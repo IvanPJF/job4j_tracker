@@ -58,6 +58,14 @@ public class MenuTracker {
         }
     }
 
+    public int[] getRanges() {
+        int[] ranges = new int[this.getActionsLength()];
+        for (int i = 0; i < this.getActionsLength(); i++) {
+            ranges[i] = i;
+        }
+        return ranges;
+    }
+
     /**
      * Внутренний класс реализующий добавление заявки.
      */
