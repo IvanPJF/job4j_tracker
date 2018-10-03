@@ -263,7 +263,7 @@ public class MenuTracker {
             String id = input.ask("Enter id: ");
             Item item = tracker.findById(id);
             if (item != null) {
-                System.out.println(item + "\n==============================");
+                System.out.println(item + System.lineSeparator() + "==============================");
             } else {
                 System.out.println("==== No item with this ID ====");
             }
