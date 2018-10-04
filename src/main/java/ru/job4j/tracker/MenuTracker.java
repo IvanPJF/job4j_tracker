@@ -6,7 +6,6 @@ package ru.job4j.tracker;
  *@version 0.1
  */
 public class MenuTracker {
-
     private Input input;
     private Tracker tracker;
     private UserAction[] actions = new UserAction[7];
@@ -69,21 +68,9 @@ public class MenuTracker {
     /**
      * Внутренний класс реализующий добавление заявки.
      */
-    private class AddItem implements UserAction {
-        private final int key;
-        private final String name;
-
+    private class AddItem extends BaseAction {
         public AddItem(int key, String name) {
-            this.key = key;
-            this.name = name;
-        }
-
-        /**
-         * Ключ меню.
-         */
-        @Override
-        public int key() {
-            return this.key;
+            super(key, name);
         }
 
         /**
@@ -99,34 +86,14 @@ public class MenuTracker {
             tracker.add(item);
             System.out.println("===== New item with id: " + item.getId() + " =====");
         }
-
-        /**
-         * Название пункта меню.
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key, this.name);
-        }
     }
 
     /**
      * Внутренний класс реализующий показ всех заявок.
      */
-    private class ShowAllItem implements UserAction {
-        private final int key;
-        private final String name;
-
+    private class ShowAllItem extends BaseAction {
         public ShowAllItem(int key, String name) {
-            this.key = key;
-            this.name = name;
-        }
-
-        /**
-         * Ключ меню.
-         */
-        @Override
-        public int key() {
-            return this.key;
+            super(key, name);
         }
 
         /**
@@ -140,34 +107,14 @@ public class MenuTracker {
             }
             System.out.println("==============================");
         }
-
-        /**
-         * Название пункта меню.
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key, this.name);
-        }
     }
 
     /**
      * Внутренний класс реализующий редактирование заявки.
      */
-    private class EditItem implements UserAction {
-        private final int key;
-        private final String name;
-
+    private class EditItem extends BaseAction {
         public EditItem(int key, String name) {
-            this.key = key;
-            this.name = name;
-        }
-
-        /**
-         * Ключ меню.
-         */
-        @Override
-        public int key() {
-            return this.key;
+            super(key, name);
         }
 
         /**
@@ -188,34 +135,14 @@ public class MenuTracker {
                 System.out.println("==== No item with this ID ====");
             }
         }
-
-        /**
-         * Название пункта меню.
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key, this.name);
-        }
     }
 
     /**
      * Внутренний класс реализующий удаление заявки.
      */
-    private class DeleteItem implements UserAction {
-        private final int key;
-        private final String name;
-
+    private class DeleteItem extends BaseAction {
         public DeleteItem(int key, String name) {
-            this.key = key;
-            this.name = name;
-        }
-
-        /**
-         * Ключ меню.
-         */
-        @Override
-        public int key() {
-            return this.key;
+            super(key, name);
         }
 
         /**
@@ -232,34 +159,14 @@ public class MenuTracker {
                 System.out.println("==== No item with this ID ====");
             }
         }
-
-        /**
-         * Название пункта меню.
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key, this.name);
-        }
     }
 
     /**
      * Внутренний класс реализующий поиск заявки по Id.
      */
-    private class FindByIdItem implements UserAction {
-        private final int key;
-        private final String name;
-
+    private class FindByIdItem extends BaseAction {
         public FindByIdItem(int key, String name) {
-            this.key = key;
-            this.name = name;
-        }
-
-        /**
-         * Ключ меню.
-         */
-        @Override
-        public int key() {
-            return this.key;
+            super(key, name);
         }
 
         /**
@@ -276,34 +183,14 @@ public class MenuTracker {
                 System.out.println("==== No item with this ID ====");
             }
         }
-
-        /**
-         * Название пункта меню.
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key, this.name);
-        }
     }
 
     /**
      * Внутренний класс реализующий поиск заявки по имени.
      */
-    private class FindByNameItem implements UserAction {
-        private final int key;
-        private final String name;
-
+    private class FindByNameItem extends BaseAction {
         public FindByNameItem(int key, String name) {
-            this.key = key;
-            this.name = name;
-        }
-
-        /**
-         * Ключ меню.
-         */
-        @Override
-        public int key() {
-            return this.key;
+            super(key, name);
         }
 
         /**
@@ -318,36 +205,16 @@ public class MenuTracker {
             }
             System.out.println("==============================");
         }
-
-        /**
-         * Название пункта меню.
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key, this.name);
-        }
     }
 
     /**
      * Внутренний класс реализующий завершение программы.
      */
-    private class ExitProgram implements UserAction {
-        private final int key;
-        private final String name;
-        private final StartUI ui;
-
+    private class ExitProgram extends BaseAction {
+        private StartUI ui;
         public ExitProgram(int key, String name, StartUI ui) {
-            this.key = key;
-            this.name = name;
+            super(key, name);
             this.ui = ui;
-        }
-
-        /**
-         * Ключ меню.
-         */
-        @Override
-        public int key() {
-            return this.key;
         }
 
         /**
@@ -356,14 +223,6 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             this.ui.stop();
-        }
-
-        /**
-         * Название пункта меню.
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key, this.name);
         }
     }
 }
