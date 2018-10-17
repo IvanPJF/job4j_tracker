@@ -41,7 +41,7 @@ public class StartUITest {
 		Tracker tracker = new Tracker();
 		Input input = new StubInput(new String[]{"0", "Friday", "One comment", "6"});
 		new StartUI(input, tracker).play();
-		assertThat(tracker.findAll()[0].getName(), is("Friday"));
+		assertThat(tracker.findAll().get(0).getName(), is("Friday"));
 	}
 
 	@Test
@@ -60,7 +60,7 @@ public class StartUITest {
 		Item itemSecond = tracker.add(new Item("Sunday", "Two comment", 234));
 		Input input = new StubInput(new String[]{"3", itemFirst.getId(), "6"});
 		new StartUI(input, tracker).play();
-		assertThat(tracker.findAll()[0].getName(), is("Sunday"));
+		assertThat(tracker.findAll().get(0).getName(), is("Sunday"));
 	}
 
 	@Test

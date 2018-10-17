@@ -1,6 +1,9 @@
 package ru.job4j.tracker;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -11,7 +14,7 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item item = new Item("Test1Name", "Test1Desc", 1989L);
         tracker.add(item);
-        assertThat(tracker.findAll()[0], is(item));
+        assertThat(tracker.findAll().get(0), is(item));
     }
 
     @Test
@@ -26,11 +29,12 @@ public class TrackerTest {
 
     @Test
     public void whenDelete2ItemThenRemainder1Item() {
-        Tracker tracker = new Tracker();
         Item firstItem = new Item("Test1Name", "Test1Desc", 1989L);
         Item secondItem = new Item("Test2Name", "Test2Desc", 1999L);
         Item thirdItem = new Item("Test3Name", "Test3Desc", 2009L);
-        Item[] expect = new Item[]{secondItem};
+        ArrayList<Item> expect = new ArrayList<>();
+        expect.add(secondItem);
+        Tracker tracker = new Tracker();
         tracker.add(firstItem);
         tracker.add(secondItem);
         tracker.add(thirdItem);
@@ -41,11 +45,14 @@ public class TrackerTest {
 
     @Test
     public void whenFindAllThenShowAllItem() {
-        Tracker tracker = new Tracker();
         Item firstItem = new Item("Test1Name", "Test1Desc", 1989L);
         Item secondItem = new Item("Test2Name", "Test2Desc", 1999L);
         Item thirdItem = new Item("Test3Name", "Test3Desc", 2009L);
-        Item[] expect = new Item[]{firstItem, secondItem, thirdItem};
+        ArrayList<Item> expect = new ArrayList<>();
+        expect.add(firstItem);
+        expect.add(secondItem);
+        expect.add(thirdItem);
+        Tracker tracker = new Tracker();
         tracker.add(firstItem);
         tracker.add(secondItem);
         tracker.add(thirdItem);
@@ -54,11 +61,13 @@ public class TrackerTest {
 
     @Test
     public void whenFindByNameThenShow2Item() {
-        Tracker tracker = new Tracker();
         Item firstItem = new Item("Test1Name", "Test1Desc", 1989L);
         Item secondItem = new Item("Test2Name", "Test2Desc", 1999L);
         Item thirdItem = new Item("Test1Name", "Test3Desc", 2009L);
-        Item[] expect = new Item[]{firstItem, thirdItem};
+        ArrayList<Item> expect = new ArrayList<>();
+        expect.add(firstItem);
+        expect.add(thirdItem);
+        Tracker tracker = new Tracker();
         tracker.add(firstItem);
         tracker.add(secondItem);
         tracker.add(thirdItem);

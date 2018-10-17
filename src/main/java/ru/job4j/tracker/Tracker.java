@@ -1,6 +1,6 @@
 package ru.job4j.tracker;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**Класс Tracker. Предназачен для хранения и работы с заявками.
@@ -9,9 +9,7 @@ import java.util.Random;
  *@version 0.1
  */
 public class Tracker {
-    private int sizeItems = 100;
-    private Item[] items = new Item[sizeItems];
-    private int position = 0;
+    private ArrayList<Item> items = new ArrayList<>();
     private static final Random RND = new Random();
 
     /**
@@ -20,10 +18,8 @@ public class Tracker {
      * @return Добавляемая заявка.
      */
     public Item add(Item item) {
-        if (position != sizeItems) {
-            item.setId(this.generateId());
-            this.items[position++] = item;
-        }
+        item.setId(this.generateId());
+        this.items.add(item);
         return item;
     }
 
@@ -43,10 +39,10 @@ public class Tracker {
      */
     public boolean replace(String id, Item item) {
         boolean result = false;
-        for (int index = 0; index < position; index++) {
-            if (this.items[index] != null && this.items[index].getId().equals(id)) {
+        for (Item value : this.items) {
+            if (value != null && id.equals(value.getId())) {
                 item.setId(id);
-                this.items[index] = item;
+                this.items.set(this.items.indexOf(value), item);
                 result = true;
                 break;
             }
@@ -61,28 +57,22 @@ public class Tracker {
      */
     public boolean delete(String id) {
         boolean result = false;
-        for (int index = 0; index < position; index++) {
-            if (this.items[index] != null && this.items[index].getId().equals(id) && index != position - 1) {
-                System.arraycopy(this.items, index + 1, this.items, index, position - index - 1);
-                items[--position] = null;
+        for (Item value : this.items) {
+            if (value != null && id.equals(value.getId())) {
+                this.items.remove(value);
                 result = true;
                 break;
-            } else if (this.items[index] != null && this.items[index].getId().equals(id)) {
-                this.items[--position] = null;
-                result = true;
             }
         }
         return result;
     }
 
     /**
-     * Поиск всех заявок в tracker.
-     * @return Массив всех заявок в tracker.
+     * Показ всех заявок.
+     * @return Список всех заявок.
      */
-    public Item[] findAll() {
-        Item[] result = new Item[position];
-        System.arraycopy(this.items, 0, result, 0, position);
-        return result;
+    public ArrayList<Item> findAll() {
+        return this.items;
     }
 
     /**
@@ -90,21 +80,14 @@ public class Tracker {
      * @param key Имя заявки, которую необходимо найти.
      * @return Массив заявок с искомым именем.
      */
-    public Item[] findByName(String key) {
-        int index = 0;
-        int count = 0;
-        Item[] result = new Item[position];
-        for (int out = 0; out < position; out++) {
-            for (int in = index; in < position; in++) {
-                if (this.items[in] != null && this.items[in].getName().equals(key)) {
-                    result[out] = this.items[in];
-                    count++;
-                    index = ++in;
-                    break;
-                }
+    public ArrayList<Item> findByName(String key) {
+        ArrayList<Item> result = new ArrayList<>();
+        for (Item value : this.items) {
+            if (value != null && key.equals(value.getName())) {
+                result.add(value);
             }
         }
-        return Arrays.copyOf(result, count);
+        return result;
     }
 
     /**
@@ -114,9 +97,9 @@ public class Tracker {
      */
     public Item findById(String id) {
         Item result = null;
-        for (Item item: this.items) {
-            if (item != null && item.getId().equals(id)) {
-                result = item;
+        for (Item value : this.items) {
+            if (value != null && id.equals(value.getId())) {
+                result = value;
                 break;
             }
         }

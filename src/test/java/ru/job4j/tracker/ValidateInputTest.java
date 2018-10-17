@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -29,7 +30,9 @@ public class ValidateInputTest {
         ValidateInput input = new ValidateInput(
                 new StubInput(new String[] {"qwerty", "1"})
         );
-        input.ask("Enter", new int[] {1});
+        ArrayList<Integer> value = new ArrayList<>();
+        value.add(1);
+        input.ask("Enter", value);
         String expect =
                 new StringBuilder()
                         .append("Please enter validate data again.")
@@ -43,7 +46,9 @@ public class ValidateInputTest {
         ValidateInput input = new ValidateInput(
                 new StubInput(new String[] {"55", "1"})
         );
-        input.ask("Enter", new int[] {1});
+        ArrayList<Integer> value = new ArrayList<>();
+        value.add(1);
+        input.ask("Enter", value);
         String expect =
                 new StringBuilder()
                         .append("Please select key from menu.")

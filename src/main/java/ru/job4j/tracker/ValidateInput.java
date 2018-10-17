@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.List;
+
 /**Класс наследующий класс ConsoleInput.
  * Для задания вопросов и получения ответов от пользователя.
  *@author IvanPJF (teaching-light@yandex.ru)
@@ -32,7 +34,7 @@ public class ValidateInput implements Input {
      * @return Ответ пользователя.
      */
     @Override
-    public int ask(String question, int[] range) {
+    public int ask(String question, List<Integer> range) {
         boolean invalid = true;
         int value = -1;
         do {

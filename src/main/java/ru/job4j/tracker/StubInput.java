@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.List;
+
 /**Класс реализующий интерфейс Input.
  * Для задания вопросов и эмуляции получения ответов от пользователя.
  *@author IvanPJF (teaching-light@yandex.ru)
@@ -29,7 +31,7 @@ public class StubInput implements Input {
      * @param range Набор возможных вариантов выбора меню.
      * @return Эмуляция ответа от пользователя.
      */
-    public int ask(String question, int[] range) {
+    public int ask(String question, List<Integer> range) {
         int key = Integer.valueOf(this.ask(question));
         boolean exist = false;
         for (int index: range) {

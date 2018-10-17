@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+
 /**Класс реализующий Меню.
  *@author IvanPJF (teaching-light@yandex.ru)
  *@since 02.10.2018
@@ -8,7 +10,7 @@ package ru.job4j.tracker;
 public class MenuTracker {
     private Input input;
     private Tracker tracker;
-    private UserAction[] actions = new UserAction[7];
+    private ArrayList<UserAction> actions = new ArrayList<>();
 
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
@@ -21,14 +23,13 @@ public class MenuTracker {
      *           Необходим для контроля показа меню.
      */
     public void  fillActions(StartUI ui) {
-        this.actions[0] = new AddItem(0, "Add new Item");
-        this.actions[1] = new ShowAllItem(1, "Show all items");
-        this.actions[2] = new EditItem(2, "Edit item");
-        this.actions[3] = new DeleteItem(3, "Delete item");
-        this.actions[4] = new FindByIdItem(4, "Find item by Id");
-        this.actions[5] = new FindByNameItem(5, "Find items by name");
-        this.actions[6] = new ExitProgram(6, "Exit Program", ui);
-
+        this.actions.add(new AddItem(0, "Add new Item"));
+        this.actions.add(new ShowAllItem(1, "Show all items"));
+        this.actions.add(new EditItem(2, "Edit item"));
+        this.actions.add(new DeleteItem(3, "Delete item"));
+        this.actions.add(new FindByIdItem(4, "Find item by Id"));
+        this.actions.add(new FindByNameItem(5, "Find items by name"));
+        this.actions.add(new ExitProgram(6, "Exit Program", ui));
     }
 
     /**
@@ -36,14 +37,14 @@ public class MenuTracker {
      * @param key Индекс элемента массива(пункта меню).
      */
     public void select(int key) {
-        this.actions[key].execute(this.input, this.tracker);
+        this.actions.get(key).execute(this.input, this.tracker);
     }
 
     /**
      * Длина массива, содержащего пункты меню.
      */
     public int getActionsLength() {
-        return this.actions.length;
+        return this.actions.size();
     }
 
     /**
@@ -57,10 +58,14 @@ public class MenuTracker {
         }
     }
 
-    public int[] getRanges() {
-        int[] ranges = new int[this.getActionsLength()];
+    /**
+     * Набор возможных вариантов выбора меню
+     * @return Список вариантов.
+     */
+    public ArrayList<Integer> getRanges() {
+        ArrayList<Integer> ranges = new ArrayList<>(this.getActionsLength());
         for (int i = 0; i < this.getActionsLength(); i++) {
-            ranges[i] = i;
+            ranges.add(i);
         }
         return ranges;
     }
