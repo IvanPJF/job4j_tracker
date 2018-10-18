@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -30,7 +31,7 @@ public class ValidateInputTest {
         ValidateInput input = new ValidateInput(
                 new StubInput(new String[] {"qwerty", "1"})
         );
-        ArrayList<Integer> value = new ArrayList<>();
+        List<Integer> value = new ArrayList<>();
         value.add(1);
         input.ask("Enter", value);
         String expect =
@@ -46,7 +47,7 @@ public class ValidateInputTest {
         ValidateInput input = new ValidateInput(
                 new StubInput(new String[] {"55", "1"})
         );
-        ArrayList<Integer> value = new ArrayList<>();
+        List<Integer> value = new ArrayList<>();
         value.add(1);
         input.ask("Enter", value);
         String expect =

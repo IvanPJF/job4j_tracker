@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**Класс реализующий Меню.
  *@author IvanPJF (teaching-light@yandex.ru)
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 public class MenuTracker {
     private Input input;
     private Tracker tracker;
-    private ArrayList<UserAction> actions = new ArrayList<>();
+    private List<UserAction> actions = new ArrayList<>();
 
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
@@ -22,7 +23,7 @@ public class MenuTracker {
      * @param ui Экземпляр класса StartUI.
      *           Необходим для контроля показа меню.
      */
-    public void  fillActions(StartUI ui) {
+    public void fillActions(StartUI ui) {
         this.actions.add(new AddItem(0, "Add new Item"));
         this.actions.add(new ShowAllItem(1, "Show all items"));
         this.actions.add(new EditItem(2, "Edit item"));
@@ -62,8 +63,8 @@ public class MenuTracker {
      * Набор возможных вариантов выбора меню
      * @return Список вариантов.
      */
-    public ArrayList<Integer> getRanges() {
-        ArrayList<Integer> ranges = new ArrayList<>(this.getActionsLength());
+    public List<Integer> getRanges() {
+        List<Integer> ranges = new ArrayList<>(this.getActionsLength());
         for (int i = 0; i < this.getActionsLength(); i++) {
             ranges.add(i);
         }

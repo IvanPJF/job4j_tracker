@@ -3,6 +3,7 @@ package ru.job4j.tracker;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -32,7 +33,7 @@ public class TrackerTest {
         Item firstItem = new Item("Test1Name", "Test1Desc", 1989L);
         Item secondItem = new Item("Test2Name", "Test2Desc", 1999L);
         Item thirdItem = new Item("Test3Name", "Test3Desc", 2009L);
-        ArrayList<Item> expect = new ArrayList<>();
+        List<Item> expect = new ArrayList<>();
         expect.add(secondItem);
         Tracker tracker = new Tracker();
         tracker.add(firstItem);
@@ -48,7 +49,7 @@ public class TrackerTest {
         Item firstItem = new Item("Test1Name", "Test1Desc", 1989L);
         Item secondItem = new Item("Test2Name", "Test2Desc", 1999L);
         Item thirdItem = new Item("Test3Name", "Test3Desc", 2009L);
-        ArrayList<Item> expect = new ArrayList<>();
+        List<Item> expect = new ArrayList<>();
         expect.add(firstItem);
         expect.add(secondItem);
         expect.add(thirdItem);
@@ -64,7 +65,7 @@ public class TrackerTest {
         Item firstItem = new Item("Test1Name", "Test1Desc", 1989L);
         Item secondItem = new Item("Test2Name", "Test2Desc", 1999L);
         Item thirdItem = new Item("Test1Name", "Test3Desc", 2009L);
-        ArrayList<Item> expect = new ArrayList<>();
+        List<Item> expect = new ArrayList<>();
         expect.add(firstItem);
         expect.add(thirdItem);
         Tracker tracker = new Tracker();

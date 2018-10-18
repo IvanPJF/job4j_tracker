@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**Класс Tracker. Предназачен для хранения и работы с заявками.
@@ -9,7 +10,7 @@ import java.util.Random;
  *@version 0.1
  */
 public class Tracker {
-    private ArrayList<Item> items = new ArrayList<>();
+    private List<Item> items = new ArrayList<>();
     private static final Random RND = new Random();
 
     /**
@@ -39,13 +40,17 @@ public class Tracker {
      */
     public boolean replace(String id, Item item) {
         boolean result = false;
+        int index = 0;
         for (Item value : this.items) {
             if (value != null && id.equals(value.getId())) {
-                item.setId(id);
-                this.items.set(this.items.indexOf(value), item);
                 result = true;
                 break;
             }
+            index++;
+        }
+        if (result) {
+            item.setId(id);
+            this.items.set(index, item);
         }
         return result;
     }
@@ -57,13 +62,15 @@ public class Tracker {
      */
     public boolean delete(String id) {
         boolean result = false;
+        int index = 0;
         for (Item value : this.items) {
             if (value != null && id.equals(value.getId())) {
-                this.items.remove(value);
                 result = true;
                 break;
             }
+            index++;
         }
+        if (result) this.items.remove(index);
         return result;
     }
 
@@ -71,7 +78,7 @@ public class Tracker {
      * Показ всех заявок.
      * @return Список всех заявок.
      */
-    public ArrayList<Item> findAll() {
+    public List<Item> findAll() {
         return this.items;
     }
 
@@ -80,8 +87,8 @@ public class Tracker {
      * @param key Имя заявки, которую необходимо найти.
      * @return Массив заявок с искомым именем.
      */
-    public ArrayList<Item> findByName(String key) {
-        ArrayList<Item> result = new ArrayList<>();
+    public List<Item> findByName(String key) {
+        List<Item> result = new ArrayList<>();
         for (Item value : this.items) {
             if (value != null && key.equals(value.getName())) {
                 result.add(value);

@@ -1,6 +1,6 @@
 package ru.job4j.tracker;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**Класс реализующий работу с tracker.
  * В консоли предлагаем пользователю меню для работы с tracker.
@@ -26,7 +26,7 @@ public class StartUI {
     public void play() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         menu.fillActions(this);
-        ArrayList<Integer> ranges = menu.getRanges();
+        List<Integer> ranges = menu.getRanges();
         do {
             menu.show();
             menu.select(input.ask("Select: ", ranges));
