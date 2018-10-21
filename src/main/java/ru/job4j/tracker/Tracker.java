@@ -70,7 +70,9 @@ public class Tracker {
             }
             index++;
         }
-        if (result) this.items.remove(index);
+        if (result) {
+            this.items.remove(index);
+        }
         return result;
     }
 
