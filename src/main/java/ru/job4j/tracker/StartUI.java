@@ -28,7 +28,15 @@ public class StartUI {
         menu.fillActions(this);
         List<Integer> ranges = menu.getRanges();
         do {
-            menu.show();
+            menu.show(
+                    consumer -> {
+                        for (UserAction action : consumer) {
+                            if (action != null) {
+                                System.out.println(action.info());
+                            }
+                        }
+                    }
+            );
             menu.select(input.ask("Select: ", ranges));
         } while (run);
     }
