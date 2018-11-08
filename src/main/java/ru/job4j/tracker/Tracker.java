@@ -3,6 +3,7 @@ package ru.job4j.tracker;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**Класс Tracker. Предназачен для хранения и работы с заявками.
  *@author IvanPJF (teaching-light@yandex.ru)
@@ -90,13 +91,9 @@ public class Tracker {
      * @return Массив заявок с искомым именем.
      */
     public List<Item> findByName(String key) {
-        List<Item> result = new ArrayList<>();
-        for (Item value : this.items) {
-            if (value != null && key.equals(value.getName())) {
-                result.add(value);
-            }
-        }
-        return result;
+        return this.items.stream().filter(
+                value -> key.equals(value.getName())
+        ).collect(Collectors.toList());
     }
 
     /**
@@ -105,13 +102,8 @@ public class Tracker {
      * @return Найденная заявка(если такая заявка существует) или null(если нет такой заявки).
      */
     public Item findById(String id) {
-        Item result = null;
-        for (Item value : this.items) {
-            if (value != null && id.equals(value.getId())) {
-                result = value;
-                break;
-            }
-        }
-        return result;
+        return this.items.stream().filter(
+                value -> id.equals(value.getId())
+        ).findFirst().orElse(null);
     }
 }
