@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
  *@since 27.09.2018
  *@version 0.1
  */
-public class Tracker {
+public class Tracker implements ITracker {
     private List<Item> items = new ArrayList<>();
     private static final Random RND = new Random();
 
@@ -41,17 +41,11 @@ public class Tracker {
      */
     public boolean replace(String id, Item item) {
         boolean result = false;
-        int index = 0;
-        for (Item value : this.items) {
-            if (value != null && id.equals(value.getId())) {
-                result = true;
-                break;
-            }
-            index++;
-        }
-        if (result) {
+        int index = this.findIndex(id);
+        if (index > -1) {
             item.setId(id);
             this.items.set(index, item);
+            result = true;
         }
         return result;
     }
@@ -63,6 +57,22 @@ public class Tracker {
      */
     public boolean delete(String id) {
         boolean result = false;
+        int index = this.findIndex(id);
+        if (index > -1) {
+            this.items.remove(index);
+            result = true;
+        }
+        return result;
+    }
+
+
+    /**
+     * Поиск индекса заявки по id.
+     * @param id Id заявки.
+     * @return Индекс заявки в трекере. -1 означает отсутствие заявки в трекере.
+     */
+    private int findIndex(String id) {
+        boolean result = false;
         int index = 0;
         for (Item value : this.items) {
             if (value != null && id.equals(value.getId())) {
@@ -71,12 +81,8 @@ public class Tracker {
             }
             index++;
         }
-        if (result) {
-            this.items.remove(index);
-        }
-        return result;
+        return result ? index : -1;
     }
-
     /**
      * Показ всех заявок.
      * @return Список всех заявок.

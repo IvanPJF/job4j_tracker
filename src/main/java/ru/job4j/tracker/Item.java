@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.Objects;
+
 /**Класс заявки.
  *@author IvanPJF (teaching-light@yandex.ru)
  *@since 27.09.2018
@@ -61,5 +63,25 @@ public class Item {
         return "Name: [" + this.name
                 + "] Description: [" + this.description
                 + "] Id: [" + this.id + "]";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Item item = (Item) o;
+        return create == item.create
+                && Objects.equals(id, item.id)
+                && Objects.equals(name, item.name)
+                && Objects.equals(description, item.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description, create);
     }
 }
