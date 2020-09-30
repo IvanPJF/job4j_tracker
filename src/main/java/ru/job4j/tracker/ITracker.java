@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import ru.job4j.tracker.react.Observe;
+
 import java.util.List;
 
 public interface ITracker {
@@ -10,7 +12,11 @@ public interface ITracker {
 
     boolean delete(String id);
 
-    List<Item> findAll();
+    default List<Item> findAll() {
+        return List.of();
+    }
+
+    void findAll(Observe<Item> model);
 
     List<Item> findByName(String key);
 

@@ -105,9 +105,7 @@ public class MenuTracker {
         @Override
         public void execute(Input input, ITracker tracker) {
             System.out.println("========== All items =========");
-            for (Item item : tracker.findAll()) {
-                System.out.println(item);
-            }
+            tracker.findAll(System.out::println);
             System.out.println("==============================");
         }
     }

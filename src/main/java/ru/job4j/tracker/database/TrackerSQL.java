@@ -2,6 +2,7 @@ package ru.job4j.tracker.database;
 
 import ru.job4j.tracker.ITracker;
 import ru.job4j.tracker.Item;
+import ru.job4j.tracker.react.Observe;
 
 import java.io.InputStream;
 import java.sql.*;
@@ -143,12 +144,10 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     }
 
     /**
-     * Get a list of all items.
-     * @return
+     * Provides access to all items in stream mode.
      */
     @Override
-    public List<Item> findAll() {
-        List<Item> result = new LinkedList<>();
+    public void findAll(Observe<Item> model) {
         try (Statement st = this.connection.createStatement();
              ResultSet rs = st.executeQuery("SELECT * FROM tracker")) {
             while (rs.next()) {
@@ -156,12 +155,11 @@ public class TrackerSQL implements ITracker, AutoCloseable {
                         rs.getString("description"),
                         rs.getTimestamp("create_date").getTime());
                 newItem.setId(rs.getString("id"));
-                result.add(newItem);
+                model.recieve(newItem);
             }
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
-        return result;
     }
 
     /**

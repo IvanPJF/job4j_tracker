@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import ru.job4j.tracker.react.Observe;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -83,6 +85,16 @@ public class Tracker implements ITracker {
         }
         return result ? index : -1;
     }
+
+    /**
+     * Доступ ко всем заявкам в режиме потока.
+     */
+    public void findAll(Observe<Item> model) {
+        for (Item elem : this.items) {
+            model.recieve(elem);
+        }
+    }
+
     /**
      * Показ всех заявок.
      * @return Список всех заявок.

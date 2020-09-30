@@ -82,7 +82,8 @@ public class TrackerSQLTest {
             Item itemOne = tracker.add(new Item("Ivan", "IvanDesc", System.currentTimeMillis()));
             Item itemTwo = tracker.add(new Item("Sam", "SamDesc", System.currentTimeMillis()));
             List<Item> expected = new LinkedList<>(Arrays.asList(itemOne, itemTwo));
-            List<Item> result = tracker.findAll();
+            List<Item> result = new LinkedList<>();
+            tracker.findAll(result::add);
             assertThat(result, is(expected));
         }
     }
